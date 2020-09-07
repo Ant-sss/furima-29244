@@ -56,5 +56,6 @@ has_one :address
 | phone_num     | string     | null: false                    |
 | buy           | references | null: false, foreign_key: true |
 
+
 belongs_to :buy
 
