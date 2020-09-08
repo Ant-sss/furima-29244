@@ -22,11 +22,11 @@ has_many :buys
 | ------------ | ---------- | ------------------------------ |
 | name         | string     | null: false                    |
 | text         | text       | null: false                    |
-| category     | integer    | null: false                    |
-| status       | integer    | null: false                    |
-| delivery_fee | integer    | null: false                    |
-| ship_from    | integer    | null: false                    |
-| days         | integer    | null: false                    |
+| category_id     | integer    | null: false                    |
+| status_id       | integer    | null: false                    |
+| deliveryfee_id | integer    | null: false                    |
+| shipfrom_id    | integer    | null: false                    |
+| days_id         | integer    | null: false                    |
 | price        | integer    | null: false                    |
 | user         | references | null: false, foreign_key: true |
 
