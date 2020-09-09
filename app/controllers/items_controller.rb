@@ -27,14 +27,14 @@ class ItemsController < ApplicationController
   end
 
   def update
-    item = Item.find(params[:id])
-    if item.update(item_params)
+    @product = Item.find(params[:id])
+    if @product.update(item_params)
       redirect_to root_path
     else
-      render :update
+      render :edit
     end
   end
-  
+
   private
 
   def item_params
