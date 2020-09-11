@@ -2,15 +2,15 @@ class BuysController < ApplicationController
   before_action :set_item, only: [:index, :create]
   
   def index
-    @buy = Buy.new
-    # @item = Item.find(params[:item_id]) # 車のおもちゃを取得
-    @address = Address.new
+    # binding.pry
+    @address = BuyAddress.new
   end
 
-  def create # @itemが空になっているので再度@itemを定義してあげる
-    # @item = Item.find(params[:item_id]) # 車のおもちゃを取得
-    @address = Address.new(address_params)
-    if @address.save
+  def create 
+    @address = BuyAddress.new(address_params)
+    # binding.pry
+    if @address.valid?
+      @address.save
       pay_item
       redirect_to root_path
     else
@@ -21,7 +21,7 @@ class BuysController < ApplicationController
   private
 
   def address_params
-    params.permit(:postal_code, :prefecture_id, :city, :building_name, :phone_num)
+    params.permit(:postal_code, :prefecture_id, :city, :house_num, :building_name, :phone_num, :token).merge(user_id: current_user.id,item_id: @item.id)
   end
 
   def set_item
@@ -33,7 +33,7 @@ class BuysController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = "sk_test_ff136e8748e55e57632f8aae"
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
       amount: set_item[:price],
       card: buy_params[:token],
