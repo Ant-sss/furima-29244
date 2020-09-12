@@ -33,8 +33,13 @@ RSpec.describe BuyAddress, type: :model do
         @buy_address.valid?
         expect(@buy_address.errors.full_messages).to include("Postal code is invalid")
       end
-      it '郵便番号が8桁以下だと保存できない' do
+      it '郵便番号が正しくないと保存できない' do
         @buy_address.postal_code = 123-456
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("Postal code is invalid")
+      end
+      it '郵便番号が正しくないと保存できない' do
+        @buy_address.postal_code = 12-4567
         @buy_address.valid?
         expect(@buy_address.errors.full_messages).to include("Postal code is invalid")
       end
