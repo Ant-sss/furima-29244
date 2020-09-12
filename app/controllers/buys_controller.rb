@@ -1,14 +1,15 @@
 class BuysController < ApplicationController
   before_action :set_item, only: [:index, :create]
+  before_action :move_to_index
   
   def index
-    # binding.pry
+
     @address = BuyAddress.new
   end
 
   def create 
     @address = BuyAddress.new(address_params)
-    # binding.pry
+ 
     if @address.valid?
       @address.save
       pay_item
@@ -39,6 +40,12 @@ class BuysController < ApplicationController
       card: buy_params[:token],
       currency:'jpy'
     )
+  end
+
+  def move_to_index
+    unless user_signed_in?
+      redirect_to root_path
+    end
   end
 
 end
