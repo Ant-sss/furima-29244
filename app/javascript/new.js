@@ -4,6 +4,11 @@ function check() {
   const tax = document.getElementById("add-tax-price");
   const profit = document.getElementById("profit");
 
+    if (price.getAttribute("data-load") != null) {
+      return null;
+    }
+    price.setAttribute("data-load", true);
+
   price.addEventListener('input', () => {
     const price_value = price.value;
   
