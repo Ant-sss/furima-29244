@@ -12,6 +12,6 @@ class User < ApplicationRecord
   validates :password, presence: true, format: { with: PASSWORD_REGEX }
   validates :first_name, :last_name, presence: true, format: { with: NAME_REGEX }
   validates :first_name_kana, :last_name_kana, presence: true, format: { with: KANA_REGEX }
-  has_many :items
-  has_many :buys
+  has_many :items, dependent: :destroy
+  has_many :buys, dependent: :destroy
 end
