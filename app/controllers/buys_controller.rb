@@ -5,7 +5,6 @@ class BuysController < ApplicationController
   before_action :move_to_index_buy
   
   def index
-
     @address = BuyAddress.new
   end
 
