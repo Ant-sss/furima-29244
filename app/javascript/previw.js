@@ -14,6 +14,6 @@ if (document.URL.match( /new/ )){
       imageElement.appendChild(blobImage);
       ImageList.appendChild(imageElement);
 
+    });
   });
-});
 };

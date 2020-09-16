@@ -8,6 +8,7 @@ require("@rails/activestorage").start()
 require("channels")
 require("../new")
 require("../card")
+require("../edit")
 require("../previw")
 
 // Uncomment to copy all static images under ../images to the output folder and reference
