@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :move_to_index_login, except: [:index, :show, :search]
   before_action :set_item, only: [:show, :edit, :update ,:destroy]
   before_action :move_to_index_user, only: [:edit]
+  before_action :search_item
 
   def index
     @items = Item.all.order("created_at DESC")
@@ -44,8 +45,10 @@ class ItemsController < ApplicationController
   end
 
   def search
-    @items = Item.search(params[:keyword])
+    @search_items = Item.search(params[:keyword])
     @buy = Buy.all
+    @results = @p.result
+    # binding.pry
   end
 
   private
@@ -69,6 +72,10 @@ class ItemsController < ApplicationController
     unless current_user.id == @item.user.id
       redirect_to root_path
     end
+  end
+
+  def search_item
+    @p = Item.ransack(params[:q])
   end
 
 end
