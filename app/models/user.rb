@@ -14,4 +14,5 @@ class User < ApplicationRecord
   validates :first_name_kana, :last_name_kana, presence: true, format: { with: KANA_REGEX }
   has_many :items, dependent: :destroy
   has_many :buys, dependent: :destroy
+  has_many :commenst, dependent: :destroy
 end

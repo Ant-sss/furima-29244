@@ -15,6 +15,7 @@
 
 has_many :items
 has_many :buys
+has_many :comments
 
 ## itmes テーブル
 
@@ -32,6 +33,7 @@ has_many :buys
 
 belongs_to :user
 has_one :buy
+has_many :comments
 
 ## buys テーブル
 
@@ -59,3 +61,13 @@ has_one :address
 
 belongs_to :buy
 
+## comments テーブル
+
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| text   | text       | null: false                    |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, horeign_key: true |
+
+belongs_to :user
+belongs_to :item
