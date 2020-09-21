@@ -1,0 +1,91 @@
+<%= render "shared/header" %>
+
+<div class='main'>
+  <div class='nav'>
+    探す
+    <ul class='lists-left'>
+    <%= search_form_for @p, url: search_items_path do |f| %>
+      <li>カテゴリー<%= f.collection_select(:category_id_eq, @category_id, :id, :name, include_blank: '指定なし', class: "select-box") %></li> 
+      <li>商品の状態<%= f.collection_select(:status_id_eq, @status_id, :id, :name, include_blank: '指定なし', class:"select-box", id:"item-sales-status") %></li>
+      <li>配送料の負担<%= f.collection_select(:deliveryfee_id_eq, @deliveryfee_id, :id, :name, include_blank: '指定なし', class:"select-box", id:"item-shipping-fee-status") %></li>
+      <br>
+      <li>価格
+        <br>
+        <%= f.radio_button :price_lteq, " " %>
+        指定なし
+        <br>
+        <%= f.radio_button :price_lteq, "500" %>
+        500円以下
+        <br>
+        <%= f.radio_button :price_lteq, "1000" %>
+        1000円以下
+        <br>
+        <%= f.radio_button :price_lteq, "2500" %>
+        2500円以下
+        <br>
+        <%= f.radio_button :price_lteq, "5000"%>
+        5000円以下
+      </li>
+      <br>
+      <%= f.submit '検索',class:"search-btn"%>
+    <% end %>
+      <%# <li><%= link_to 'ブランド', "#", class: "brand-list" %></li> 
+    </ul>
+  </div>
+
+  <%# 商品一覧 %>
+  <div class='item-contents'>
+    <h2 class='title'>検索結果</h2>
+      <%# <%= link_to '検索結果', "#", class: "subtitle"  %>
+
+
+      <% if @results.length != 0 %> 
+        <ul class='item-lists'>
+          <% @results.each do |item| %> 
+            <li class='list'>
+              <%= link_to item_path(item.id) do %>
+                <div class='item-img-content'>
+                  <%= image_tag item.image, class: "item-img" %>
+
+                  <% @buy.each do |buy| %>
+                    <% if buy.item_id == item.id %>
+                      <div class='sold-out'>
+                        <span>Sold Out!!</span>
+                      </div>
+                    <% end %>
+                  <% end %>
+
+                </div>
+                <div class='item-info'>
+                  <h3 class='item-name'>
+                    <%= item.name %>
+                  </h3>
+                  <div class='item-price'>
+                    <span><%= item.price %>円<br>(税込み)</span>
+                    <div class='star-btn'>
+                      <%= image_tag "star.png", class:"star-icon" %>
+                      <span class='star-count'>0</span>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+        <%# 商品がない場合のダミー %>
+      <% else %>
+        <%= link_to "トップへ戻る", "/", class:"info" %>
+      <% end %>
+      <%# /商品がない場合のダミー %>
+  </div>
+  <%# /商品一覧 %>
+</div>
+
+<div class='purchase-btn'>
+  <span class='purchase-btn-text'>出品する</span>
+  <a href="/items/new">
+    <%= image_tag 'camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
+  </a>
+</div>
+
+<%= render "shared/footer" %>

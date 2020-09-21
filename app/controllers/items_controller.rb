@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index_login, except: [:index, :show]
+  before_action :move_to_index_login, except: [:index, :show, :search]
   before_action :set_item, only: [:show, :edit, :update ,:destroy]
   before_action :move_to_index_user, only: [:edit]
+  before_action :search_item
 
   def index
     @items = Item.all.order("created_at DESC")
@@ -43,6 +44,12 @@ class ItemsController < ApplicationController
     end
   end
 
+  def search
+    @buy = Buy.all
+    @results = @p.result
+    # binding.pry
+  end
+
   private
 
   def item_params
@@ -64,6 +71,13 @@ class ItemsController < ApplicationController
     unless current_user.id == @item.user.id
       redirect_to root_path
     end
+  end
+
+  def search_item
+    @p = Item.ransack(params[:q])
+    @category_id = Category.where.not(id: 1)
+    @status_id = Status.where.not(id: 1)
+    @deliveryfee_id = Deliveryfee.where.not(id: 1)
   end
 
 end
