@@ -45,7 +45,6 @@ class ItemsController < ApplicationController
   end
 
   def search
-    @search_items = Item.search(params[:keyword])
     @buy = Buy.all
     @results = @p.result
     # binding.pry
@@ -76,6 +75,9 @@ class ItemsController < ApplicationController
 
   def search_item
     @p = Item.ransack(params[:q])
+    @category_id = Category.where.not(id: 1)
+    @status_id = Status.where.not(id: 1)
+    @deliveryfee_id = Deliveryfee.where.not(id: 1)
   end
 
 end

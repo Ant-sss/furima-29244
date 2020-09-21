@@ -5,9 +5,26 @@
     探す
     <ul class='lists-left'>
       <%= search_form_for @p, url: search_items_path do |f| %>
-        <li>カテゴリー<%= f.collection_select(:category_id_eq, Category.all, :id, :name, {}, {class: "select-box"}) %></li>
-        <li>商品の状態<%= f.collection_select(:status_id_eq, Status.all, :id, :name, {}, {class:"select-box", id:"item-sales-status"}) %></li>
-        <li>配送料の負担<%= f.collection_select(:deliveryfee_id_eq, Deliveryfee.all, :id, :name, {}, {class:"select-box", id:"item-shipping-fee-status"}) %></li>
+        <li>カテゴリー<%= f.collection_select(:category_id_eq, @category_id, :id, :name, include_blank: '指定なし', class: "select-box") %></li>
+        <li>商品の状態<%= f.collection_select(:status_id_eq, @status_id, :id, :name, include_blank: '指定なし', class:"select-box", id:"item-sales-status") %></li>
+        <li>配送料の負担<%= f.collection_select(:deliveryfee_id_eq, @deliveryfee_id, :id, :name, include_blank: '指定なし', class:"select-box", id:"item-shipping-fee-status") %></li>
+        <li>価格
+          <br>
+          <%= f.radio_button :price_lteq, " " %>
+          指定なし
+          <br>
+          <%= f.radio_button :price_lteq, "500" %>
+          500円以下
+          <br>
+          <%= f.radio_button :price_lteq, "1000" %>
+          1000円以下
+          <br>
+          <%= f.radio_button :price_lteq, "2500" %>
+          2500円以下
+          <br>
+          <%= f.radio_button :price_lteq, "5000"%>
+          5000円以下
+        </li>
         <br>
         <%= f.submit '検索',class:"search-btn"%>
       <% end %>
