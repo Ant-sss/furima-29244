@@ -76,10 +76,13 @@
     <div class="comments">
       <h3>コメント一覧</h3>
       <div class="comment", id="comment">
-        <% @comments.reverse_each do |comment| %>
-          <p><strong><%= comment.user.nickname %>：</strong>
-            <%= comment.text %>
-          </p>
+        <% if @comments.present? %>
+          <% @comments.each do |comment| %>
+
+            <p><strong><%= comment.user.nickname %>：</strong>
+              <%= comment.text %>
+            </p>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -89,6 +92,7 @@
   <div class="comment-box">
     <% if user_signed_in? %>
       <%= form_with(model: [@item, @comment], local: true) do |f| %>
+        <%= render 'shared/error_messages', model: @comment %>
         <%= f.text_field :text, placeholder: "コメントを書く", class: "comment-text" %>
         <p class="comment-warn">
           相手のことを考え丁寧なコメントを心がけましょう。

@@ -20,6 +20,9 @@ ja:
        shipfrom_id: 発送元の地域
        day_id: 発送までの日数
 
+      comment:
+       text: コメント
+
     errors:
       format: "%{attribute}%{message}"
       messages: 

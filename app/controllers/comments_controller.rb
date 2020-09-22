@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to item_path(@item)
     else
-      render root_path
+      render 'items/show'
     end
   end
 
