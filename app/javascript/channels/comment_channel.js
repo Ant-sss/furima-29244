@@ -10,10 +10,12 @@ consumer.subscriptions.create("CommentChannel", {
   },
 
   received(data) {
-    const html = `<p>${data.content.text}</p>`;
-    const commnets = document.getElementById('commnets');
+    const html_text = `<p>${data.content.text}</p>`;
+    const html_user = `<p>${data.content.user_id}</p>`;
+    const comments = document.getElementById('comment');
     const newComment = document.getElementById('comment_text');
-    commnets.insertAdjacentHTML('afterbegin', html);
+    comments.insertAdjacentHTML('afterbegin', html_text);
+    comments.insertAdjacentHTML('afterbegin', html_user);
     newComment.value='';
     // Called when there's incoming data on the websocket for this channel
   }

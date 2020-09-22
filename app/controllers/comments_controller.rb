@@ -6,9 +6,12 @@ class CommentsController < ApplicationController
   end
 
   def create
+    @item = Item.find(params[:item_id])
     @comment = Comment.new(comment_params)
     if @comment.save
-      ActionCable.server.broadcast 'comment_cahnnel', content: @comment
+      redirect_to item_path(@item)
+    else
+      render root_path
     end
   end
 
