@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :deliveryfee
   belongs_to_active_hash :shipfrom
   belongs_to_active_hash :day
-  has_many :commentsk dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   PRICE_REGEX = /[0-9]/
   with_options presence: true do

@@ -72,22 +72,39 @@
         <span>不適切な商品の通報</span>
       </div>
     </div>
+
+    <div class="comments">
+      <h3>コメント一覧</h3>
+      <div class="comment", id="comment">
+        <% if @comments.present? %>
+          <% @comments.each do |comment| %>
+
+            <p><strong><%= comment.user.nickname %>：</strong>
+              <%= comment.text %>
+            </p>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
   <%# /商品の概要 %>
 
   <div class="comment-box">
-    <form>
-      <textarea class="comment-text"></textarea>
-      <p class="comment-warn">
-        相手のことを考え丁寧なコメントを心がけましょう。
-        <br>
-        不快な言葉遣いなどは利用制限や退会処分となることがあります。
-      </p>
-      <button type="submit" class="comment-btn">
-        <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%>
-        <span>コメントする<span>
-      </button>
-    </form>
+    <% if user_signed_in? %>
+      <%= form_with(model: [@item, @comment], local: true) do |f| %>
+        <%= render 'shared/error_messages', model: @comment %>
+        <%= f.text_field :text, placeholder: "コメントを書く", class: "comment-text" %>
+        <p class="comment-warn">
+          相手のことを考え丁寧なコメントを心がけましょう。
+          <br>
+          不快な言葉遣いなどは利用制限や退会処分となることがあります。
+        </p>
+        <%= f.submit "コメントする", class:"comment-btn" %>
+        <%# <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%> 
+      <% end %>
+        <%# <% else %>
+        <%# <strong><p>***コメントの投稿には新規登録/ログインが必要です</p></strong> %> 
+    <% end %>
   </div>
   <div class="links">
     <a href="#" class="change-item-btn">
