@@ -49,7 +49,7 @@ a {
 
 /* 商品一覧 */
 
-.item-contents {
+.item-search-contents {
   background-color: #FFF;
   display: flex;
   flex-direction: column;

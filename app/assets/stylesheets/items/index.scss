@@ -44,12 +44,11 @@ a {
 
 .main-right {
   background-color: #f8f8f8;
-  width: 85vw;
 }
 
 /* 画面上部の「人生を変えるフリマアプリ」帯部分 */
 .title-contents {
-  width: 100%;
+  width: 85vw;
   background-image: image-url('furima-header01.png');
   background-size: cover;
   background-repeat: no-repeat;
@@ -88,6 +87,9 @@ a {
 
 /* //画面上部の「人生を変えるフリマアプリ」帯部分 */
 
+.main-right-bottom {
+  width: 100%;
+}
 /* FURIMAが選ばれる3つの理由部分 */
 .select-reason-contents {
   padding: 5vh 15vw;
